@@ -3,12 +3,14 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from "helmet";
 import morgan from "morgan";
+import connectDB from "./config/mongodb.js";
 
 // Load environment Variables 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3301;
+connectDB();
 
 // MiddleWares
 app.use(helmet());

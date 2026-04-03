@@ -3,7 +3,9 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from "helmet";
 import morgan from "morgan";
+
 import connectDB from "./config/mongodb.js";
+import userRoutes from "./routes/userRoutes.js"
 
 // Load environment Variables 
 dotenv.config();
@@ -22,6 +24,8 @@ app.use(express.json());
 app.get('/', (req , res) => {
     res.json({message: 'Pharmacy API is Running..'});
 });
+
+app.use("/api/users", userRoutes );
 
 /* 404 */
 app.use((req, res) => {

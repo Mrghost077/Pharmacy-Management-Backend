@@ -27,7 +27,7 @@ app.get('/', (req , res) => {
 });
 
 app.use("/api/users", userRoutes );
-app.use("api/prescriptions", prescriptionRoutes);
+app.use("/api/prescriptions", prescriptionRoutes);
 
 /* 404 */
 app.use((req, res) => {

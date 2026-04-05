@@ -5,7 +5,8 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import connectDB from "./config/mongodb.js";
-import userRoutes from "./routes/userRoutes.js"
+import userRoutes from "./routes/userRoutes.js";
+import prescriptionRoutes from "./routes/prescriptionRoutes.js";
 
 // Load environment Variables 
 dotenv.config();
@@ -26,6 +27,7 @@ app.get('/', (req , res) => {
 });
 
 app.use("/api/users", userRoutes );
+app.use("/api/prescriptions", prescriptionRoutes);
 
 /* 404 */
 app.use((req, res) => {

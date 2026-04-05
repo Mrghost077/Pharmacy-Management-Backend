@@ -16,7 +16,7 @@ export const uploadPrescription = async (req , res) => {
 
         await newPrescription.save();
 
-        return res.status(201).json({ success: true, message: "Prescription Uploaded Successfully", data : newPrescription});
+        return res.status(201).json({ success: true, message: "Prescription Uploaded Successfully"});
     } catch (error) {
         return res.status(500).json({success: false, message: error.message});
     }

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const prescriptionSchema = new mongoose.Schema({
   userId : {
     type: mongoose.Schema.ObjectId,
-    ref: 'user',
+    ref: 'User',
     required: true
   },
 

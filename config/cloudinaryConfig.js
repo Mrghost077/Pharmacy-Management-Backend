@@ -22,7 +22,12 @@ const storage = new CloudinaryStorage({
             width: 1000,
             height: 1000,
             crop: 'limit'
-        }]
+        }],
+
+        public_id: (req , file ) => {
+            const fileName = file.originalname.split('.')[0].replace(/\s+/g, '-');
+            return `rx-${Date.now()}-${fileName}`;
+        }
     }
 });
 

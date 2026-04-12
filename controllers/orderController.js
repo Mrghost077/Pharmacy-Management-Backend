@@ -3,12 +3,18 @@ import prescriptionModel from "../models/prescriptionModel.js";
 
 export const createOrder = async (req , res) => {
     try {
-        const {prescriptionId, userId, items, totalAmount, durationInDays} = req.body;
+        const {prescriptionId, items, totalAmount, durationInDays} = req.body;
+
+        const prescription = await  prescriptionModel.findById(prescriptionId);
+
+        if (!prescription){
+            return res.status(400).json({success: false , message : "Prescription not found. Unable to create order"})
+        }
 
         //create New order
         const newOrder = new orderModel({
-            userId,
-            prescriptionId,
+            userId : prescription.userId,
+            prescriptionId : prescription._id,
             items,
             totalAmount,
             durationInDays,

@@ -7,6 +7,7 @@ import morgan from "morgan";
 import connectDB from "./config/mongodb.js";
 import userRoutes from "./routes/userRoutes.js";
 import prescriptionRoutes from "./routes/prescriptionRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 // Load environment Variables 
 dotenv.config();
@@ -28,6 +29,7 @@ app.get('/', (req , res) => {
 
 app.use("/api/users", userRoutes );
 app.use("/api/prescriptions", prescriptionRoutes);
+app.use("/api/orders", orderRoutes);
 
 /* 404 */
 app.use((req, res) => {

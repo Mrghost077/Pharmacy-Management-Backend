@@ -9,6 +9,10 @@ const prescriptionSchema = new mongoose.Schema({
 
   imageUrl : {type: String, required: true},
   publicId: {type: String},
+  patientNotes : {
+        type : String,
+        maxlength : 500
+    },
   status : {
     type: String,
     enum: ["pending", "approved", "rejected"],

@@ -11,7 +11,8 @@ export const uploadPrescription = async (req , res) => {
         const newPrescription = new prescriptionModel({
             userId : req.user._id,
             imageUrl: req.file.path,
-            publicId: req.file.filename
+            publicId: req.file.filename,
+            patientNotes: req.body.patientNotes
         });
 
         await newPrescription.save();

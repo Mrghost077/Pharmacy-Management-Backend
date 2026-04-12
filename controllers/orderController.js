@@ -42,3 +42,23 @@ export const createOrder = async (req , res) => {
         return res.status(500).json({ message: error.message });
     }
 };
+
+export const getUserOrders = async (req , res) =>{
+    try {
+        const orders = await orderModel.find({userId : req.user._id})
+        .populate('prescriptionId', 'imageUrl status')
+        .sort({createdAt : -1}); // sort newset first
+
+        if (!orders){
+            return res.json({message : "You dont have any orders yet"})
+        }
+
+        return res.status(200).json({
+            success : true,
+            results : orders.length,
+            data : orders
+        })
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}

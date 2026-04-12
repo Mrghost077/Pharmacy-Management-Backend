@@ -19,6 +19,8 @@ const orderSchema = new mongoose.Schema({
         maxlength : 500
     },
 
+    durationInDays : Number,
+
     items : [{
         name : String,
         brandName : String,
@@ -38,3 +40,7 @@ const orderSchema = new mongoose.Schema({
         default: 'awaiting-quote'
     },
 }, {timestamps : true});
+
+const orderModel = mongoose.models.order || mongoose.model('order', orderSchema);
+
+export default orderModel;

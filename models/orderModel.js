@@ -13,12 +13,6 @@ const orderSchema = new mongoose.Schema({
         required : true
     },
 
-    // patients Input
-    patientNotes : {
-        type : String,
-        maxlength : 500
-    },
-
     durationInDays : Number,
 
     items : [{

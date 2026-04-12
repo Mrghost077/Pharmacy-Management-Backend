@@ -11,12 +11,23 @@ export const createOrder = async (req , res) => {
             return res.status(400).json({success: false , message : "Prescription not found. Unable to create order"})
         }
 
+        let calculatedTotal = 0;
+
+        // calculate total and subtotal
+        const calculatedItems = items.map(item => {
+            const subTotal = item.unitPrice * item.quantityRequested;
+            calculatedTotal += subTotal;
+
+            return {... item, subTotal : subTotal};
+        });
+
+
         //create New order
         const newOrder = new orderModel({
             userId : prescription.userId,
             prescriptionId : prescription._id,
-            items,
-            totalAmount,
+            items : calculatedItems,
+            totalAmount: calculatedTotal,
             durationInDays,
             orderStatus: "quote-sent"
         });

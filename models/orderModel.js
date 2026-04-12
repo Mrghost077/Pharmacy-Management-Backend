@@ -30,7 +30,7 @@ const orderSchema = new mongoose.Schema({
     totalAmount : Number,
     orderStatus : {
         type: String,
-        enum: ["awaiting-quote", "quote-sent", "rejected", "paid", "processing", "delivered"],
+        enum: ["awaiting-quote", "quote-sent", "rejected", "confirmed", "ready", "collected"],
         default: 'awaiting-quote'
     },
 }, {timestamps : true});

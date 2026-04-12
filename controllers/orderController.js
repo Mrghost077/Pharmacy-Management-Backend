@@ -1,6 +1,7 @@
 import orderModel from "../models/orderModel.js";
 import prescriptionModel from "../models/prescriptionModel.js";
 
+// create order by staff
 export const createOrder = async (req , res) => {
     try {
         const {prescriptionId, items, totalAmount, durationInDays} = req.body;
@@ -43,6 +44,7 @@ export const createOrder = async (req , res) => {
     }
 };
 
+// Get all orders by Patient
 export const getUserOrders = async (req , res) =>{
     try {
         const orders = await orderModel.find({userId : req.user._id})
@@ -60,5 +62,30 @@ export const getUserOrders = async (req , res) =>{
         })
     } catch (error) {
         return res.status(500).json({ message: error.message });
+    }
+}
+
+// Respond to quote by patient
+export const confirmOrder = async (req , res) => {
+    try {
+        const {status} = req.body;
+        const orderId = req.params.id;
+
+        const order = await orderModel.findOne({_id : orderId, userId : req.user._id});
+
+        if(!order){
+            return res.status(404).json({success: false, message : "Something went Wrong. Order cannot be identified"})
+        }
+
+        orderModel.orderStatus = status;
+        await orderModel.save();
+
+        return res.status(200).json({
+            success: true,
+            message : status === 'confirmed' ? "Order confirmed! Staff will prepare it now." : "Order rejected."
+        });
+        
+    } catch (error) {
+       return res.status(500).json({ message: error.message });
     }
 }
